@@ -2,64 +2,116 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white font-sans flex flex-col">
+
+      {/* NAVBAR */}
+      <nav className="w-full border-b border-black/5 dark:border-white/10">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4">
+          
+          <h1 className="text-lg sm:text-xl font-semibold tracking-wide">
+            FiveFootTwo Gallery
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+
+          <div className="hidden sm:flex gap-6 text-sm">
+            <a href="#" className="hover:opacity-60 transition">Artists</a>
+            <a href="#" className="hover:opacity-60 transition">Exhibitions</a>
+            <a href="#" className="hover:opacity-60 transition">About</a>
+          </div>
+
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+      </nav>
+
+      {/* HERO */}
+      <main className="flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
+        
+        <h1 className="text-3xl sm:text-5xl lg:text-7xl font-semibold tracking-tight leading-tight max-w-4xl">
+          A Space for Emerging Art.
+        </h1>
+
+        <p className="mt-4 sm:mt-6 text-base sm:text-lg text-zinc-600 dark:text-zinc-400 max-w-xl">
+          FiveFootTwo Gallery is a curated platform for emerging artists —
+          intimate, raw, and deeply human stories told through contemporary art.
+        </p>
+
+        {/* CTA */}
+        <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#"
+            className="w-full sm:w-auto px-6 py-3 rounded-full bg-black text-white dark:bg-white dark:text-black hover:opacity-80 transition text-sm sm:text-base"
           >
+            Explore Gallery
+          </a>
+          <a
+            href="#"
+            className="w-full sm:w-auto px-6 py-3 rounded-full border border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition text-sm sm:text-base"
+          >
+            View Exhibitions
+          </a>
+        </div>
+
+        {/* HERO IMAGE */}
+        <div className="mt-12 sm:mt-16 w-full max-w-5xl">
+          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10]">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              src="/art.jpg"
+              alt="Gallery Artwork"
+              fill
+              className="object-cover rounded-xl"
+              priority
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
         </div>
       </main>
+
+      {/* FEATURE SECTION */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
+        
+        {/* Artists */}
+        <div>
+          <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">
+            Curated Artists
+          </h2>
+          <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mb-5 sm:mb-6">
+            Discover a carefully selected group of emerging artists pushing the boundaries
+            of visual storytelling.
+          </p>
+
+          <div className="relative w-full aspect-[4/3]">
+            <Image
+              src="/artist.jpg"
+              alt="Artists"
+              fill
+              className="object-cover rounded-lg"
+            />
+          </div>
+        </div>
+
+        {/* Exhibitions */}
+        <div>
+          <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">
+            Exhibitions
+          </h2>
+          <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mb-5 sm:mb-6">
+            Explore digital exhibitions that blend narrative, emotion, and experimental formats.
+          </p>
+
+          <div className="relative w-full aspect-[4/3]">
+            <Image
+              src="/exhibition.jpg"
+              alt="Exhibitions"
+              fill
+              className="object-cover rounded-lg"
+            />
+          </div>
+        </div>
+
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-black/5 dark:border-white/10 text-center py-6 text-xs sm:text-sm text-zinc-500">
+        © 2026 FiveFootTwo Gallery
+      </footer>
+
     </div>
   );
 }
