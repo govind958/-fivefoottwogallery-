@@ -1,117 +1,69 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import Navbar from "@/app/component/Navbar";
+import Footer from "@/app/component/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white font-sans flex flex-col">
+    <div className="min-h-screen bg-[#fafafa] text-[#1a1a1a] dark:bg-[#0a0a0a] dark:text-zinc-100 font-sans flex flex-col selection:bg-red-100 selection:text-red-900">
+      
+      {/* SHARED NAVBAR */}
+      <Navbar />
 
-      {/* NAVBAR */}
-      <nav className="w-full border-b border-black/5 dark:border-white/10">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4">
+      {/* HERO SECTION */}
+      <main className="pt-40 md:pt-60 flex-1 flex flex-col items-center px-6">
+        <div className="animate-in fade-in slide-in-from-bottom-8 duration-1000 flex flex-col items-center">
+          <h2 className="text-[10px] tracking-[0.6em] uppercase text-zinc-400 mb-8 font-medium">
+            Established 2026
+          </h2>
           
-          <h1 className="text-lg sm:text-xl font-semibold tracking-wide">
-            FiveFootTwo Gallery
+          <h1 className="text-5xl md:text-8xl lg:text-9xl font-extralight tracking-tighter leading-[0.9] text-center max-w-6xl">
+            Pure <br /> <span className="italic font-serif">Perspective.</span>
           </h1>
+          
+          <p className="mt-12 text-sm md:text-base text-zinc-500 dark:text-zinc-400 max-w-lg text-center font-light leading-relaxed tracking-wide">
+            A sanctuary for emerging visual storytellers. We curate raw, human narratives through the lens of contemporary photography.
+          </p>
 
-          <div className="hidden sm:flex gap-6 text-sm">
-            <a href="#" className="hover:opacity-60 transition">Artists</a>
-            <a href="#" className="hover:opacity-60 transition">Exhibitions</a>
-            <a href="#" className="hover:opacity-60 transition">About</a>
+          <div className="mt-16 flex gap-8">
+             <Link 
+               href="/photographers" 
+               className="text-[10px] tracking-[0.4em] uppercase border-b border-zinc-300 dark:border-zinc-700 pb-2 hover:border-red-500 transition-colors"
+             >
+               Enter Gallery
+             </Link>
+             <Link 
+               href="/exhibitions" 
+               className="text-[10px] tracking-[0.4em] uppercase border-b border-zinc-300 dark:border-zinc-700 pb-2 hover:border-red-500 transition-colors"
+             >
+               Exhibitions
+             </Link>
           </div>
-
-        </div>
-      </nav>
-
-      {/* HERO */}
-      <main className="flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
-        
-        <h1 className="text-3xl sm:text-5xl lg:text-7xl font-semibold tracking-tight leading-tight max-w-4xl">
-          A Space for Emerging Art.
-        </h1>
-
-        <p className="mt-4 sm:mt-6 text-base sm:text-lg text-zinc-600 dark:text-zinc-400 max-w-xl">
-          FiveFootTwo Gallery is a curated platform for emerging artists —
-          intimate, raw, and deeply human stories told through contemporary art.
-        </p>
-
-        {/* CTA */}
-        <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
-          <a
-            href="#"
-            className="w-full sm:w-auto px-6 py-3 rounded-full bg-black text-white dark:bg-white dark:text-black hover:opacity-80 transition text-sm sm:text-base"
-          >
-            Explore Gallery
-          </a>
-          <a
-            href="#"
-            className="w-full sm:w-auto px-6 py-3 rounded-full border border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition text-sm sm:text-base"
-          >
-            View Exhibitions
-          </a>
         </div>
 
         {/* HERO IMAGE */}
-        <div className="mt-12 sm:mt-16 w-full max-w-5xl">
-          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10]">
+        <div className="mt-32 w-full max-w-[1600px] px-4 md:px-12 pb-24">
+          <Link href="/photographers" className="block relative group overflow-hidden aspect-[16/10] md:aspect-[21/9]">
             <Image
-              src="/art.jpg"
-              alt="Gallery Artwork"
+              src="/art.jpg" 
+              alt="Gallery"
               fill
-              className="object-cover rounded-xl"
+              className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[2000ms] ease-out"
               priority
             />
-          </div>
+            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center">
+               <span className="text-white text-[10px] tracking-[0.5em] uppercase border border-white/40 px-8 py-3 backdrop-blur-sm">
+                 View Work
+               </span>
+            </div>
+          </Link>
         </div>
       </main>
 
-      {/* FEATURE SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
-        
-        {/* Artists */}
-        <div>
-          <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">
-            Curated Artists
-          </h2>
-          <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mb-5 sm:mb-6">
-            Discover a carefully selected group of emerging artists pushing the boundaries
-            of visual storytelling.
-          </p>
-
-          <div className="relative w-full aspect-[4/3]">
-            <Image
-              src="/artist.jpg"
-              alt="Artists"
-              fill
-              className="object-cover rounded-lg"
-            />
-          </div>
-        </div>
-
-        {/* Exhibitions */}
-        <div>
-          <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">
-            Exhibitions
-          </h2>
-          <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mb-5 sm:mb-6">
-            Explore digital exhibitions that blend narrative, emotion, and experimental formats.
-          </p>
-
-          <div className="relative w-full aspect-[4/3]">
-            <Image
-              src="/exhibition.jpg"
-              alt="Exhibitions"
-              fill
-              className="object-cover rounded-lg"
-            />
-          </div>
-        </div>
-
-      </section>
-
-      {/* FOOTER */}
-      <footer className="border-t border-black/5 dark:border-white/10 text-center py-6 text-xs sm:text-sm text-zinc-500">
-        © 2026 FiveFootTwo Gallery
-      </footer>
-
+      {/* SHARED FOOTER */}
+      <Footer />
     </div>
   );
 }
