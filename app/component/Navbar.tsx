@@ -17,7 +17,7 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-     { name: "artist", href: "/Artists" },
+     { name: "artists", href: "/Artists" },
     { name: "exhibitions", href: "/exhibitions" },
     { name: "about", href: "/about" },
     { name: "contact", href: "/contact" },
