@@ -17,7 +17,7 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "photographers", href: "/photographers" },
+     { name: "artist", href: "/Artists" },
     { name: "exhibitions", href: "/exhibitions" },
     { name: "about", href: "/about" },
     { name: "contact", href: "/contact" },
