@@ -33,7 +33,7 @@ export default function Footer() {
 
       {/* Copyright Notice */}
       <p className="text-[9px] tracking-[0.5em] uppercase text-zinc-300">
-        © 2026 FiveFootTwo Gallery — London
+        © 2026 FiveFootTwo Gallery | All Rights Reserved
       </p>
     </footer>
   );
