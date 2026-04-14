@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Navbar from "@/app/component/Navbar";
 import Footer from "@/app/component/Footer";
+import { DESIGN } from "@/app/constants/theme"; // Import your palette
 
 // Mock data remains local to the page as it defines the content
 const photographers = [
@@ -16,7 +17,7 @@ const photographers = [
 
 export default function PhotographersPage() {
   return (
-    <div className="min-h-screen bg-[#fafafa] text-[#1a1a1a] dark:bg-[#0a0a0a] dark:text-zinc-100 font-sans flex flex-col selection:bg-red-100 selection:text-red-900">
+    <div className={`${DESIGN.layout} ${DESIGN.bg} ${DESIGN.textPrimary}`}>
       
       {/* SHARED NAVBAR */}
       <Navbar />
@@ -26,14 +27,14 @@ export default function PhotographersPage() {
         
         {/* Header Section */}
         <header className="mb-24 animate-in fade-in slide-in-from-bottom-6 duration-1000">
-          <h2 className="text-[10px] tracking-[0.6em] uppercase text-zinc-400 mb-6 font-medium">
+          <h2 className={`${DESIGN.label} mb-6`}>
             The Collective
           </h2>
-          <h1 className="text-5xl md:text-7xl font-extralight tracking-tighter leading-none mb-8">
+          <h1 className={`${DESIGN.heroHeading} mb-8`}>
             Our <span className="italic font-serif">Artists.</span>
           </h1>
-          <div className="h-[1px] w-24 bg-red-500 mb-8" />
-          <p className="max-w-md text-sm text-zinc-500 dark:text-zinc-400 font-light leading-relaxed tracking-wide">
+          <div className={`h-[1px] w-24 mb-8 bg-current opacity-30 ${DESIGN.borderSubtle}`} />
+          <p className={`max-w-md ${DESIGN.textMuted} font-light leading-relaxed tracking-wide`}>
             A curated selection of photographers pushing the boundaries of visual language and emotional depth.
           </p>
         </header>
@@ -60,16 +61,16 @@ export default function PhotographersPage() {
 
               {/* Artist Info */}
               <div className="flex flex-col gap-1">
-                <h3 className="text-lg font-light tracking-tight group-hover:text-red-500 transition-colors duration-300 uppercase">
+                <h3 className={`text-lg font-light tracking-tight transition-colors duration-300 uppercase ${DESIGN.accentHover}`}>
                   {artist.name}
                 </h3>
-                <p className="text-[10px] tracking-[0.3em] uppercase text-zinc-400 font-medium italic">
+                <p className={`${DESIGN.label} italic opacity-70`}>
                   {artist.specialty}
                 </p>
               </div>
               
               <div className="mt-4 overflow-hidden">
-                <div className="h-[1px] w-0 bg-zinc-300 dark:bg-zinc-800 group-hover:w-full transition-all duration-700" />
+                <div className={`h-[1px] w-0 ${DESIGN.borderSubtle} bg-current group-hover:w-full transition-all duration-700 opacity-20`} />
               </div>
             </div>
           ))}

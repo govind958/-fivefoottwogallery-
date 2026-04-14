@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/app/component/Navbar";
 import Footer from "@/app/component/Footer";
+import { DESIGN } from "@/app/constants/theme"; // Import your palette
 
 const exhibitions = [
   {
@@ -34,7 +35,7 @@ const exhibitions = [
 
 export default function ExhibitionsPage() {
   return (
-    <div className="min-h-screen bg-[#fafafa] text-[#1a1a1a] dark:bg-[#0a0a0a] dark:text-zinc-100 font-sans flex flex-col selection:bg-red-100 selection:text-red-900">
+    <div className={`${DESIGN.layout} ${DESIGN.bg} ${DESIGN.textPrimary}`}>
       
       {/* SHARED NAVBAR */}
       <Navbar />
@@ -43,10 +44,10 @@ export default function ExhibitionsPage() {
         
         {/* SECTION TITLE */}
         <header className="mb-24 animate-in fade-in slide-in-from-bottom-6 duration-1000">
-          <h2 className="text-[10px] tracking-[0.6em] uppercase text-zinc-400 mb-6 font-medium">
+          <h2 className={`${DESIGN.label} mb-6`}>
             Programming
           </h2>
-          <h1 className="text-5xl md:text-7xl font-extralight tracking-tighter leading-none mb-12">
+          <h1 className={`${DESIGN.heroHeading} mb-12`}>
             Seasonal <span className="italic font-serif">Shows.</span>
           </h1>
         </header>
@@ -68,7 +69,7 @@ export default function ExhibitionsPage() {
                   className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[2000ms] ease-out"
                 />
                 <div className="absolute top-6 left-6">
-                   <span className="text-[9px] tracking-[0.4em] uppercase bg-white/90 dark:bg-black/90 px-4 py-2 text-zinc-500 dark:text-zinc-300 backdrop-blur-sm">
+                   <span className={`${DESIGN.label} bg-white/90 dark:bg-black/90 px-4 py-2 text-zinc-500 dark:text-zinc-300 backdrop-blur-sm opacity-100`}>
                      {exhibit.status}
                    </span>
                 </div>
@@ -76,20 +77,20 @@ export default function ExhibitionsPage() {
 
               {/* Text Side */}
               <div className="lg:col-span-4 flex flex-col gap-4 pb-4">
-                <h3 className="text-[10px] tracking-[0.5em] uppercase text-red-500 font-medium">
+                <h3 className={`${DESIGN.label} ${DESIGN.accentHover} opacity-100`}>
                   {exhibit.artist}
                 </h3>
                 <h2 className="text-3xl md:text-4xl font-extralight tracking-tighter leading-tight group-hover:italic transition-all duration-500">
                   {exhibit.title}
                 </h2>
-                <p className="text-xs tracking-widest text-zinc-400 font-light mt-2">
+                <p className={`text-xs tracking-widest ${DESIGN.textMuted} font-light mt-2`}>
                   {exhibit.dates}
                 </p>
                 
                 <div className="mt-8">
                   <Link 
                     href={`/exhibitions/${exhibit.id}`} 
-                    className="text-[9px] tracking-[0.4em] uppercase border-b border-zinc-200 dark:border-zinc-800 pb-2 hover:border-red-500 transition-colors"
+                    className={`${DESIGN.navLink} border-b ${DESIGN.borderSubtle} ${DESIGN.accentHover} pb-2`}
                   >
                     View Details
                   </Link>
@@ -100,15 +101,15 @@ export default function ExhibitionsPage() {
         </div>
 
         {/* PAST ARCHIVE MINI-GRID */}
-        <section className="mt-60 border-t border-zinc-100 dark:border-zinc-900 pt-24">
-          <h4 className="text-[10px] tracking-[0.6em] uppercase text-zinc-400 mb-16 text-center">
+        <section className={`mt-60 border-t ${DESIGN.borderSubtle} pt-24 opacity-30`}>
+          <h4 className={`${DESIGN.label} mb-16 text-center`}>
             Digital Archive
           </h4>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-40 hover:opacity-100 transition-opacity duration-700">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 grayscale cursor-not-allowed">
              {[1, 2, 3, 4].map((i) => (
                <div 
                  key={i} 
-                 className="aspect-square bg-zinc-200 dark:bg-zinc-800 grayscale cursor-not-allowed" 
+                 className="aspect-square bg-zinc-200 dark:bg-zinc-800" 
                />
              ))}
           </div>

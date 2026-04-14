@@ -4,10 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/app/component/Navbar";
 import Footer from "@/app/component/Footer";
+import { DESIGN } from "@/app/constants/theme"; // Import your palette
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#fafafa] text-[#1a1a1a] dark:bg-[#0a0a0a] dark:text-zinc-100 font-sans flex flex-col selection:bg-red-100 selection:text-red-900">
+    <div className={`${DESIGN.layout} ${DESIGN.bg} ${DESIGN.textPrimary}`}>
       
       {/* SHARED NAVBAR */}
       <Navbar />
@@ -16,10 +17,10 @@ export default function AboutPage() {
         {/* HERO SECTION - Large Typography */}
         <section className="px-8 md:px-12 max-w-[1600px] mx-auto mb-32">
           <div className="animate-in fade-in slide-in-from-bottom-8 duration-1000">
-            <h2 className="text-[10px] tracking-[0.6em] uppercase text-zinc-400 mb-8 font-medium">
+            <h2 className={`${DESIGN.label} mb-8`}>
               The Vision
             </h2>
-            <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-extralight tracking-tighter leading-[0.85] max-w-5xl">
+            <h1 className={`${DESIGN.heroHeading} lg:text-[10rem] leading-[0.85] max-w-5xl`}>
               Elevating <br /> 
               <span className="italic font-serif">The Frame.</span>
             </h1>
@@ -37,11 +38,11 @@ export default function AboutPage() {
             />
           </div>
           <div className="lg:col-span-5 lg:pl-12 flex flex-col gap-8">
-            <p className="text-xl md:text-2xl font-light leading-relaxed tracking-tight text-zinc-600 dark:text-zinc-300">
+            <p className={`text-xl md:text-2xl font-light leading-relaxed tracking-tight ${DESIGN.textMuted}`}>
               Founded in 2026, FiveFootTwo Gallery serves as a bridge between raw human experience and contemporary visual art. 
             </p>
-            <div className="h-[1px] w-20 bg-red-500" />
-            <p className="text-sm font-light leading-loose text-zinc-500 dark:text-zinc-400 italic">
+            <div className={`h-[1px] w-20 bg-current opacity-30 ${DESIGN.borderSubtle}`} />
+            <p className={`text-sm font-light leading-loose italic ${DESIGN.textMuted}`}>
               "We believe that photography is not just about capturing a moment, but about translating the silent dialogue between the subject and the lens."
             </p>
           </div>
@@ -51,20 +52,20 @@ export default function AboutPage() {
         <section className="bg-zinc-100 dark:bg-zinc-900/50 py-32 px-8 md:px-12">
           <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-20">
             <div>
-              <h4 className="text-[10px] tracking-[0.4em] uppercase text-red-500 mb-6">Curatorial Rigor</h4>
-              <p className="text-sm font-light leading-relaxed text-zinc-500">
+              <h4 className={`${DESIGN.label} ${DESIGN.accentHover} mb-6 opacity-100`}>Curatorial Rigor</h4>
+              <p className={`text-sm font-light leading-relaxed ${DESIGN.textMuted}`}>
                 Every exhibition is a deliberate narrative, curated over months to ensure a cohesive and challenging experience for our visitors.
               </p>
             </div>
             <div>
-              <h4 className="text-[10px] tracking-[0.4em] uppercase text-red-500 mb-6">Emerging Voices</h4>
-              <p className="text-sm font-light leading-relaxed text-zinc-500">
+              <h4 className={`${DESIGN.label} ${DESIGN.accentHover} mb-6 opacity-100`}>Emerging Voices</h4>
+              <p className={`text-sm font-light leading-relaxed ${DESIGN.textMuted}`}>
                 Our primary mission is to provide a platform for the next generation of visual storytellers from across the globe.
               </p>
             </div>
             <div>
-              <h4 className="text-[10px] tracking-[0.4em] uppercase text-red-500 mb-6">Physical & Digital</h4>
-              <p className="text-sm font-light leading-relaxed text-zinc-500">
+              <h4 className={`${DESIGN.label} ${DESIGN.accentHover} mb-6 opacity-100`}>Physical & Digital</h4>
+              <p className={`text-sm font-light leading-relaxed ${DESIGN.textMuted}`}>
                 A hybrid sanctuary. Located in the heart of London, but accessible to the global community through immersive digital archives.
               </p>
             </div>
@@ -77,13 +78,13 @@ export default function AboutPage() {
           <div className="flex justify-center gap-12">
             <Link 
               href="/contact" 
-              className="text-[10px] tracking-[0.4em] uppercase border-b border-zinc-300 dark:border-zinc-700 pb-2 hover:border-red-500 transition-colors"
+              className={`${DESIGN.navLink} border-b ${DESIGN.borderSubtle} ${DESIGN.accentHover} pb-2`}
             >
               Contact Us
             </Link>
             <Link 
               href="/open-call" 
-              className="text-[10px] tracking-[0.4em] uppercase border-b border-zinc-300 dark:border-zinc-700 pb-2 hover:border-red-500 transition-colors"
+              className={`${DESIGN.navLink} border-b ${DESIGN.borderSubtle} ${DESIGN.accentHover} pb-2`}
             >
               Submit Work
             </Link>
