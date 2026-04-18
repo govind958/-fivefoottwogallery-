@@ -1,26 +1,57 @@
 "use client";
 
-import Image from "next/image";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import Navbar from "@/app/component/Navbar";
 import Footer from "@/app/component/Footer";
-import { DESIGN } from "@/app/constants/theme"; // Import your palette
+import { DESIGN } from "@/app/constants/theme";
 
 export default function Home() {
+  const containerRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Smoother scaling and opacity for the immersive feel
+  const scale = useTransform(scrollYProgress, [0, 0.8], [1, 1.05]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
+  const blur = useTransform(scrollYProgress, [0, 0.5], ["0px", "8px"]);
+
   return (
-    <div className={`${DESIGN.layout} ${DESIGN.bg} ${DESIGN.textPrimary}`}>
+    <div className={`${DESIGN.layout} ${DESIGN.bg} ${DESIGN.textPrimary} relative`}>
       
+      {/* IMMERSIVE BACKGROUND LAYER */}
+      <div className="fixed inset-0 w-full h-full -z-10 overflow-hidden">
+        <motion.div 
+          style={{ scale, opacity, filter: `blur(${blur})` }} 
+          className="w-full h-full transition-transform duration-700"
+        >
+          <video
+            src="/video/video1.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          />
+          {/* Subtle gradient overlay to help text readability without killing immersion */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/60" /> 
+        </motion.div>
+      </div>
+
       <Navbar />
 
-      <main className="pt-40 md:pt-60 flex-1 flex flex-col items-center px-6">
-        <div className="animate-in fade-in slide-in-from-bottom-8 duration-1000 flex flex-col items-center">
+      <main ref={containerRef} className="pt-40 md:pt-60 flex-1 flex flex-col items-center px-6 z-10 relative">
+        <div className="animate-in fade-in slide-in-from-bottom-10 duration-1000 flex flex-col items-center">
           
-          {/* Using Label and Muted Text */}
-          <h2 className={`${DESIGN.label} ${DESIGN.label} mb-8`}>
+          <h2 className={`${DESIGN.label} mb-8 opacity-80`}>
             Established 2026
           </h2>
           
-          <h1 className={`${DESIGN.heroHeading} text-center max-w-6xl`}>
+          <h1 className={`${DESIGN.heroHeading} text-center max-w-6xl tracking-tight`}>
             Pure <br /> <span className="italic font-serif">Perspective.</span>
           </h1>
           
@@ -31,34 +62,25 @@ export default function Home() {
           <div className="mt-16 flex gap-8">
              <Link 
                href="/photographers" 
-               className={`${DESIGN.navLink} ${DESIGN.borderSubtle} ${DESIGN.accentHover}`}
+               className={`${DESIGN.navLink} ${DESIGN.borderSubtle} ${DESIGN.accentHover} backdrop-blur-md bg-white/5 px-8 py-3`}
              >
                Enter Gallery
-             </Link>
-             <Link 
-               href="/exhibitions" 
-               className={`${DESIGN.navLink} ${DESIGN.borderSubtle} ${DESIGN.accentHover}`}
-             >
-               Exhibitions
              </Link>
           </div>
         </div>
 
-        {/* HERO IMAGE */}
-        <div className="mt-32 w-full max-w-[1600px] px-4 md:px-12 pb-24">
-          <Link href="/photographers" className="block relative group overflow-hidden aspect-[16/10] md:aspect-[21/9]">
-            <Image
-              src="/art.jpg" 
-              alt="Gallery"
-              fill
-              className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[2000ms] ease-out"
-              priority
+        {/* HERO VIDEO SECTION - Enhanced blending */}
+        <div className="mt-32 w-full max-w-[1400px] px-4 pb-24">
+          <Link href="/photographers" className="block relative group overflow-hidden rounded-sm shadow-2xl aspect-[16/9]">
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500 z-10" />
+            <video
+              src="/video/video1.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover grayscale-[50%] group-hover:grayscale-0 scale-[1.02] group-hover:scale-100 transition-all duration-[2000ms] ease-out"
             />
-            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center">
-               <span className="text-white text-[10px] tracking-[0.5em] uppercase border border-white/40 px-8 py-3 backdrop-blur-sm">
-                 View Work
-               </span>
-            </div>
           </Link>
         </div>
       </main>
