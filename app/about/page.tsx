@@ -43,7 +43,7 @@ export default function AboutPage() {
             </p>
             <div className={`h-[1px] w-20 bg-current opacity-30 ${DESIGN.borderSubtle}`} />
             <p className={`text-sm font-light leading-loose italic ${DESIGN.textMuted}`}>
-              "We believe that photography is not just about capturing a moment, but about translating the silent dialogue between the subject and the lens."
+              "Contemporary art is not confined to objects—it operates as a framework for questioning, where ideas, environments, and audiences intersect in an ongoing dialogue."
             </p>
           </div>
         </section>
