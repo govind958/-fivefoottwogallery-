@@ -56,12 +56,12 @@ export default function Home() {
           </h1>
           
           <p className={`mt-12 text-sm md:text-base ${DESIGN.textMuted} max-w-lg text-center font-light leading-relaxed tracking-wide`}>
-            A sanctuary for emerging visual storytellers. We curate raw, human narratives through the lens of contemporary photography.
+            A sanctuary for emerging visual storytellers. We curate raw, human narratives through the lens of contemporary artists.
           </p>
 
           <div className="mt-16 flex gap-8">
              <Link 
-               href="/photographers" 
+               href="/artists" 
                className={`${DESIGN.navLink} ${DESIGN.borderSubtle} ${DESIGN.accentHover} backdrop-blur-md bg-white/5 px-8 py-3`}
              >
                Enter Gallery
@@ -71,7 +71,7 @@ export default function Home() {
 
         {/* HERO VIDEO SECTION - Enhanced blending */}
         <div className="mt-32 w-full max-w-[1400px] px-4 pb-24">
-          <Link href="/photographers" className="block relative group overflow-hidden rounded-sm shadow-2xl aspect-[16/9]">
+          <Link href="/artists" className="block relative group overflow-hidden rounded-sm shadow-2xl aspect-[16/9]">
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500 z-10" />
             <video
               src="/video/video1.mp4"

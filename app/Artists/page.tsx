@@ -6,7 +6,7 @@ import Footer from "@/app/component/Footer";
 import { DESIGN } from "@/app/constants/theme"; // Import your palette
 
 // Mock data remains local to the page as it defines the content
-const photographers = [
+const artists = [
   { id: 1, name: "Elena Rossi", specialty: "Architectural Noir", image: "/p1.jpg" },
   { id: 2, name: "Marcus Thorne", specialty: "Human Narrative", image: "/p2.jpg" },
   { id: 3, name: "Suki Han", specialty: "Urban Solitude", image: "/p3.jpg" },
@@ -15,7 +15,7 @@ const photographers = [
   { id: 6, name: "Lukas Weber", specialty: "Minimalist Still Life", image: "/p6.jpg" },
 ];
 
-export default function PhotographersPage() {
+export default function artistsPage() {
   return (
     <div className={`${DESIGN.layout} ${DESIGN.bg} ${DESIGN.textPrimary}`}>
       
@@ -35,13 +35,13 @@ export default function PhotographersPage() {
           </h1>
           <div className={`h-[1px] w-24 mb-8 bg-current opacity-30 ${DESIGN.borderSubtle}`} />
           <p className={`max-w-md ${DESIGN.textMuted} font-light leading-relaxed tracking-wide`}>
-            A curated selection of photographers pushing the boundaries of visual language and emotional depth.
+            A curated selection of artists pushing the boundaries of visual language and emotional depth.
           </p>
         </header>
 
-        {/* Photographers Grid */}
+        {/* artists Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
-          {photographers.map((artist, index) => (
+          {artists.map((artist, index) => (
             <div 
               key={artist.id} 
               className="group cursor-pointer animate-in fade-in slide-in-from-bottom-12 duration-1000"

@@ -59,7 +59,7 @@ export default function OpenCallPage() {
             <section>
               <h3 className={`${DESIGN.label} mb-6`}>The Concept</h3>
               <p className={`text-xl font-light leading-relaxed ${DESIGN.textMuted}`}>
-                We are seeking photographic series that document the periphery—the overlooked details of our changing environments. "Field Notes" is an exploration of the quiet transitions between the urban and the wild.
+                We are seeking artists series that document the periphery—the overlooked details of our changing environments. "Field Notes" is an exploration of the quiet transitions between the urban and the wild.
               </p>
             </section>
 
