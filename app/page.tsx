@@ -1,91 +1,116 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import Link from "next/link";
+import { useRef, useEffect } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Navbar from "@/app/component/Navbar";
 import Footer from "@/app/component/Footer";
 import { DESIGN } from "@/app/constants/theme";
 
 export default function Home() {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
+  // 1. Capture scroll progress
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end end"]
   });
 
-  // Smoother scaling and opacity for the immersive feel
-  const scale = useTransform(scrollYProgress, [0, 0.8], [1, 1.05]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
-  const blur = useTransform(scrollYProgress, [0, 0.5], ["0px", "8px"]);
+  // 2. Add a Spring Physics layer (The "Secret Sauce")
+  // This smooths out the raw scroll data into a fluid stream.
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 40,   // Lower = more "weight" / slower reaction
+    damping: 20,     // Prevents bouncy vibrations
+    restDelta: 0.0001
+  });
+
+  // Background visual transforms
+  const scale = useTransform(smoothProgress, [0, 1], [1, 1.1]);
+  const videoOpacity = useTransform(smoothProgress, [0, 0.7, 1], [1, 0.8, 0.3]);
+
+  // 3. High-Fidelity Scrubbing Logic
+  useEffect(() => {
+    let frameId: number;
+
+    const render = () => {
+      const video = videoRef.current;
+      if (video && video.duration) {
+        // Calculate the target time based on the smooth scroll progress
+        const targetTime = smoothProgress.get() * video.duration;
+        
+        // Directly sync the video time. 
+        // Modern browsers handle this well if the video is encoded correctly.
+        video.currentTime = targetTime;
+      }
+      frameId = requestAnimationFrame(render);
+    };
+
+    frameId = requestAnimationFrame(render);
+    return () => cancelAnimationFrame(frameId);
+  }, [smoothProgress]);
 
   return (
-    <div className={`${DESIGN.layout} ${DESIGN.bg} ${DESIGN.textPrimary} relative`}>
+    // Increase 'height' to make the video play slower (more scroll room)
+    <div ref={containerRef} className="relative bg-black" style={{ height: "800vh" }}>
       
-      {/* IMMERSIVE BACKGROUND LAYER */}
-      <div className="fixed inset-0 w-full h-full -z-10 overflow-hidden">
+      {/* FIXED BACKGROUND CONTAINER */}
+      <div className="fixed inset-0 w-full h-full overflow-hidden z-0">
         <motion.div 
-          style={{ scale, opacity, filter: `blur(${blur})` }} 
-          className="w-full h-full transition-transform duration-700"
+          style={{ scale, opacity: videoOpacity }} 
+          className="w-full h-full"
         >
           <video
+            ref={videoRef}
             src="/video/video1.mp4"
-            autoPlay
-            loop
             muted
             playsInline
+            preload="auto"
             className="w-full h-full object-cover"
+            style={{ pointerEvents: "none" }}
           />
-          {/* Subtle gradient overlay to help text readability without killing immersion */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/60" /> 
+          <div className="absolute inset-0 bg-black/30" />
         </motion.div>
       </div>
 
-      <Navbar />
+      {/* UI CONTENT LAYER */}
+      <div className="relative z-20 flex flex-col">
+        <Navbar />
 
-      <main ref={containerRef} className="pt-40 md:pt-60 flex-1 flex flex-col items-center px-6 z-10 relative">
-        <div className="animate-in fade-in slide-in-from-bottom-10 duration-1000 flex flex-col items-center">
-          
-          <h2 className={`${DESIGN.label} mb-8 opacity-80`}>
-            Established 2026
-          </h2>
-          
-          <h1 className={`${DESIGN.heroHeading} text-center max-w-6xl tracking-tight`}>
-            Pure <br /> <span className="italic font-serif">Perspective.</span>
-          </h1>
-          
-          <p className={`mt-12 text-sm md:text-base ${DESIGN.textMuted} max-w-lg text-center font-light leading-relaxed tracking-wide`}>
-            A sanctuary for emerging visual storytellers. We curate raw, human narratives through the lens of contemporary artists.
-          </p>
+        <main className="flex flex-col items-center">
+          {/* First View: Hero Info */}
+          <section className="h-screen w-full flex flex-col items-center justify-center px-6 sticky top-0">
+            <motion.div 
+              style={{ 
+                opacity: useTransform(smoothProgress, [0, 0.1], [1, 0]),
+                y: useTransform(smoothProgress, [0, 0.1], [0, -50])
+              }}
+              className="text-center"
+            >
+              <h2 className={`${DESIGN.label} mb-6 tracking-[0.4em] uppercase text-white`}>
+                Established 2026
+              </h2>
+              <p className="text-white/60 max-w-sm font-light tracking-widest text-sm uppercase">
+                Scroll to navigate time
+              </p>
+            </motion.div>
+          </section>
 
-          <div className="mt-16 flex gap-8">
-             <Link 
-               href="/artists" 
-               className={`${DESIGN.navLink} ${DESIGN.borderSubtle} ${DESIGN.accentHover} backdrop-blur-md bg-white/5 px-8 py-3`}
+          {/* This empty space creates the scrolling "track" */}
+          <section className="h-[600vh] w-full pointer-events-none" />
+
+          {/* Final View: Closing */}
+          <section className="h-screen w-full flex items-center justify-center">
+             <motion.div
+               style={{ opacity: useTransform(smoothProgress, [0.8, 0.95], [0, 1]) }}
+               className="text-white/20 text-xs tracking-[1em] uppercase"
              >
-               Enter Gallery
-             </Link>
-          </div>
-        </div>
+               End of Perspective
+             </motion.div>
+          </section>
+        </main>
 
-        {/* HERO VIDEO SECTION - Enhanced blending */}
-        <div className="mt-32 w-full max-w-[1400px] px-4 pb-24">
-          <Link href="/artists" className="block relative group overflow-hidden rounded-sm shadow-2xl aspect-[16/9]">
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500 z-10" />
-            <video
-              src="/video/video1.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover grayscale-[50%] group-hover:grayscale-0 scale-[1.02] group-hover:scale-100 transition-all duration-[2000ms] ease-out"
-            />
-          </Link>
-        </div>
-      </main>
-
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 }
